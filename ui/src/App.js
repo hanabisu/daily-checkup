@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Container maxWidth="lg">
         <Navbar />
-        <Routes> "kjhlj"
+        <Routes> 
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
         </Routes>
