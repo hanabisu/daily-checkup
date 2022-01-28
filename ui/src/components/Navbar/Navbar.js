@@ -15,12 +15,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const app = useRealmApp();
-
-  console.log(`navbar: ${user}`);
-
   useEffect(() => {
-    // const token = user?.token;
-    // JWT
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]); // when location changes set user
 

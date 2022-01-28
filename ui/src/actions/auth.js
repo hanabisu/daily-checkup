@@ -2,18 +2,20 @@
 import * as Realm from 'realm-web';
 import { AUTH } from '../constants/actionTypes';
 
+export const formatLikeGoogleResponse = (response) => ({
+  result: {
+    email: response._profile.data.email,
+    name: response._profile.data.email,
+  },
+  token: response._accessToken,
+});
+
 export const signin = (formData, router, app) => async (dispatch) => {
   try {
     const resp = await app.login(
       Realm.Credentials.emailPassword(formData.email, formData.password),
     );
-    const data = {
-      result: {
-        email: resp._profile.data.email,
-        name: resp._profile.data.email,
-      },
-      token: resp._accessToken,
-    };
+    const data = formatLikeGoogleResponse(resp);
     dispatch({ type: AUTH, data });
 
     router('/home');
@@ -29,13 +31,8 @@ export const signup = (formData, router, app) => async (dispatch) => {
     const resp = await app.login(
       Realm.Credentials.emailPassword(formData.email, formData.password),
     );
-    const data = {
-      result: {
-        email: resp._profile.data.email,
-        name: resp._profile.data.email,
-      },
-      token: resp._accessToken,
-    };
+
+    const data = formatLikeGoogleResponse(resp);
     dispatch({ type: AUTH, data });
 
     router('/home');

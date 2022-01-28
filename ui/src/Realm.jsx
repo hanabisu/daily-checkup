@@ -28,7 +28,6 @@ export function RealmAppProvider({ appId, children }) {
   };
   const logout = async () => {
     await app.currentUser?.logOut();
-    console.log(app.currentUser);
     setCurrentUser(app.currentUser);
   };
 
