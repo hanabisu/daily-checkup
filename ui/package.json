@@ -27,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "assume-unchanged": "git update-index --assume-unchanged .env",
+    "postinstall": "npm run assume-unchanged"
   },
   "eslintConfig": {
     "extends": [
