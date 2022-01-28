@@ -19,7 +19,7 @@ function Input({
         label={label}
         autoFocus={autofocus}
         type={type}
-        InputProps={name === 'password' ? {
+        InputProps={name.toLowerCase().includes('password') ? {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton onClick={handleShowPassword}>

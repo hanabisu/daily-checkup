@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { LOGOUT } from '../../constants/actionTypes';
+import { useRealmApp } from '../../Realm';
 
 function Navbar() {
   const classes = useStyles();
@@ -13,6 +14,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const app = useRealmApp();
 
   console.log(`navbar: ${user}`);
 
@@ -23,6 +25,7 @@ function Navbar() {
   }, [location]); // when location changes set user
 
   const logout = () => {
+    app.logout();
     dispatch({ type: LOGOUT });
     navigate('/');
     setUser(null);

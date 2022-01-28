@@ -1,23 +1,27 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import './App.css';
 import { Container } from '@material-ui/core';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import { RealmAppProvider } from './Realm';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Container maxWidth="lg">
-        <Navbar />
-        <Routes> 
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+    <RealmAppProvider appId={process.env.REACT_APP_REALM_APP_ID}>
+      <BrowserRouter>
+        <Container maxWidth="lg">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </RealmAppProvider>
   );
 }
 

@@ -10,15 +10,33 @@ import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
 import { AUTH } from '../../constants/actionTypes';
+import { signup, signin } from '../../actions/auth';
+import { useRealmApp } from '../../Realm';
 
 function Login() {
   const classes = useStyles();
+
+  const initialState = {
+    firstName: '', lastName: '', email: '', password: '', confirmPassword: '',
+  };
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const app = useRealmApp();
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      dispatch(signup(form, navigate, app));
+    } else {
+      dispatch(signin(form, navigate, app));
+    }
+  };
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -66,7 +84,7 @@ function Login() {
             }
             <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
             <GoogleLogin
-              clientId="251231669393-arbb6q3qct85ho8f3bf1q0rvvet04i8b.apps.googleusercontent.com"
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               render={(renderProps) => (
                 <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} startIcon={<Icon />} variant="contained">
                   Google Sign In
