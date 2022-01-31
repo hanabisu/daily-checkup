@@ -45,8 +45,9 @@ function Login() {
   const googleLogin = async () => {
     try {
       const RedirectUri = `http://${window.location.host}/redirect`;
-      const credentials = Realm.Credentials.google(RedirectUri);
+      const credentials = await Realm.Credentials.google(RedirectUri);
       const user = await app.loginToRealm(credentials);
+      console.log(app.currentUser);
       const userDetails = await user.functions.getSingleUser(user.id);
       if (userDetails) {
         // eslint-disable-next-line no-underscore-dangle
