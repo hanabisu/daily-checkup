@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Redirection from './components/Login/Redirection';
 import { RealmAppProvider } from './Realm';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Container maxWidth="lg">
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/redirect" element={<Redirection />} />
             <Route path="/home" element={<Home />} />
           </Routes>
         </Container>

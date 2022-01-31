@@ -3,14 +3,14 @@ import {
   Avatar, Button, Paper, Grid, Typography, Container,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { GoogleLogin } from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import * as Realm from 'realm-web';
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
 import { AUTH } from '../../constants/actionTypes';
-import { signup, signin } from '../../actions/auth';
+import { signup, signin, formatLikeGoogleResponse } from '../../actions/auth';
 import { useRealmApp } from '../../Realm';
 
 function Login() {
@@ -42,21 +42,26 @@ function Login() {
 
   const switchMode = () => setIsSignUp((prevIsSignUp) => !prevIsSignUp);
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  const googleLogin = async () => {
     try {
-      dispatch({ type: AUTH, data: { result, token } });
-      navigate('/home');
+      const RedirectUri = `http://${window.location.host}/redirect`;
+      const credentials = Realm.Credentials.google(RedirectUri);
+      const user = await app.loginToRealm(credentials);
+      const userDetails = await user.functions.getSingleUser(user.id);
+      if (userDetails) {
+        // eslint-disable-next-line no-underscore-dangle
+        const data = formatLikeGoogleResponse(userDetails, user._accessToken);
+        dispatch({ type: AUTH, data });
+        navigate('/home');
+      } else {
+        // navigate('/profile');
+        console.log('setup profile');
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  const googleError = (error) => {
-    console.log(error);
-    console.log('Google Sign In was unsuccessful. Try again later');
-  };
-  // const state = null;
+
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
@@ -82,18 +87,16 @@ function Login() {
               )
             }
             <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
-            <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              render={(renderProps) => (
-                <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} startIcon={<Icon />} variant="contained">
-                  Google Sign In
-                </Button>
-              )}
-              onSuccess={googleSuccess}
-              onFailure={googleError}
-              cookiePolicy="single_host_origin"
-            />
-
+            <Button
+              className={classes.googleButton}
+              color="primary"
+              fullWidth
+              onClick={googleLogin}
+              startIcon={<Icon />}
+              variant="contained"
+            >
+              Google Sign In
+            </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Button onClick={switchMode}>{isSignUp ? 'Already have an account? Sign In' : 'New User? Sign Up'}</Button>

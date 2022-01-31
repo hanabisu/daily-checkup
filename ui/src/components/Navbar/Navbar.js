@@ -20,7 +20,7 @@ function Navbar() {
   }, [location]); // when location changes set user
 
   const logout = () => {
-    app.logout();
+    app.logoutOfRealm();
     dispatch({ type: LOGOUT });
     navigate('/');
     setUser(null);

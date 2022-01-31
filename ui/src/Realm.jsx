@@ -21,19 +21,19 @@ export function RealmAppProvider({ appId, children }) {
     setApp(new Realm.App(appId));
   }, [appId]);
 
-  const login = async (credentials) => {
+  const loginToRealm = async (credentials) => {
     const user = await app.logIn(credentials);
     setCurrentUser(app.currentUser);
     return user;
   };
-  const logout = async () => {
+  const logoutOfRealm = async () => {
     await app.currentUser?.logOut();
     setCurrentUser(app.currentUser);
   };
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const wrapped = {
-    ...app, currentUser, login, logout,
+    ...app, currentUser, loginToRealm, logoutOfRealm,
   };
   return (
     <RealmAppContext.Provider value={wrapped}>
