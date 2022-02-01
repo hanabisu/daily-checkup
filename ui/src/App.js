@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import './App.css';
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material/';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './components/Home/Home';

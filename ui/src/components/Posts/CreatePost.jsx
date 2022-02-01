@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Button, Snackbar } from '@mui/material';
+import {
+  TextField, Button, Snackbar, Stack,
+} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRealmApp } from '../../Realm';
@@ -37,7 +39,7 @@ function CreatePost({ getData }) {
     </IconButton>
   );
   return (
-    <div>
+    <Stack sx={{ pt: 2 }} spacing={2}>
       <TextField
         sx={{ width: '50%' }}
         id="post-text"
@@ -49,7 +51,7 @@ function CreatePost({ getData }) {
         value={postText}
       />
 
-      <Button variant="contained" color="primary" onClick={postEvent}>
+      <Button sx={{ width: '25%' }} variant="contained" color="primary" onClick={postEvent}>
         Save
       </Button>
       <Snackbar
@@ -59,7 +61,7 @@ function CreatePost({ getData }) {
         message="Post saved!"
         action={action}
       />
-    </div>
+    </Stack>
   );
 }
 
