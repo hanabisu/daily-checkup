@@ -44,10 +44,10 @@ function Login() {
 
   const googleLogin = async () => {
     try {
-      const RedirectUri = `https://${window.location.host}/redirect`;
+      const RedirectUri = `${window.location.protocol}//${window.location.host}/redirect`;
       const credentials = await Realm.Credentials.google(RedirectUri);
       const user = await app.loginToRealm(credentials);
-      console.log(window.location.host);
+      console.log(RedirectUri);
       console.log(app.currentUser);
       const userDetails = await user.functions.getSingleUser(user.id);
       if (userDetails) {
