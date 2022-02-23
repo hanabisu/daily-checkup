@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {
-  Avatar, Button, Paper, Grid, Typography, Container,
+  Button, Paper, Grid, Typography, Container,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Realm from 'realm-web';
@@ -45,9 +44,9 @@ function Login() {
   const googleLogin = async () => {
     try {
       const RedirectUri = `${window.location.protocol}//${window.location.host}/redirect`;
+      console.log(`RedirectURI: ${RedirectUri}`);
       const credentials = await Realm.Credentials.google(RedirectUri);
       const user = await app.loginToRealm(credentials);
-      console.log(`RedirectURI: ${RedirectUri}`);
       console.log(app.currentUser);
       const userDetails = await user.functions.getSingleUser(user.id);
       if (userDetails) {
@@ -67,10 +66,8 @@ function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography variant="h5">{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
+        <Typography variant="h3" style={{ padding: '40px 10px 40px 10px', fontFamily: 'Fredoka One' }}>Daily CheckUp</Typography>
+        <Typography variant="h5" style={{ fontFamily: 'Fredoka One' }}>{isSignUp ? 'sign up' : 'login'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {
@@ -88,7 +85,7 @@ function Login() {
                 <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
               )
             }
-            <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
+            <Button type="submit" fullWidth variant="contained" color="primary">{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
             <Button
               className={classes.googleButton}
               color="primary"

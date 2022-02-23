@@ -4,12 +4,10 @@ import {
 } from '@material-ui/core';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import useStyles from './styles';
 import { LOGOUT } from '../../constants/actionTypes';
 import { useRealmApp } from '../../Realm';
 
 function Navbar() {
-  // const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,22 +36,25 @@ function Navbar() {
   };
 
   return (
-
     <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Photos
+      <Toolbar style={{ justifyContent: 'space-between' }}>
+        <Typography style={{ fontFamily: 'Fredoka One' }} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Daily CheckUp
         </Typography>
         <div>
           <IconButton
-            size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
             onClick={handleOpenUserMenu}
             color="inherit"
           >
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar alt={user.result.name} src={user.result.imageUrl}>
+              {user.result.name.charAt(0)}
+            </Avatar>
+            <Typography style={{ padding: '10px' }}>
+              {user.result.name}
+            </Typography>
           </IconButton>
           <Menu
             id="menu-appbar"

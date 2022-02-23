@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import reducers from './reducers/index';
 
 import './index.css';
@@ -11,9 +12,32 @@ import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#fbc02d',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+    info: {
+      main: '#795548',
+    },
+  },
+  spacing: 8,
+  typography: {
+    fontFamily: 'Zen Kaku Gothic Antique',
+    fontWeightLight: 500,
+    fontWeightRegular: 600,
+  },
+});
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root'),
 );

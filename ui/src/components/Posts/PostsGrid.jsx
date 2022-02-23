@@ -33,6 +33,13 @@ function PostsGrid({ posts }) {
 
   const renderGrid = () => {
     const monthMap = mapTo();
+    if (posts.length === 0) {
+      return (
+        <Typography variant="body1" component="div" sx={{ p: 2 }}>
+          nothing saved yet... add a new positive above!
+        </Typography>
+      );
+    }
     return Object.keys(monthMap).map((key) => {
       const somePosts = monthMap[key];
       return (

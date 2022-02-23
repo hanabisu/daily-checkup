@@ -1,7 +1,9 @@
 import React from 'react';
-import {
-  Button, Typography, Card, CardContent, CardActions,
-} from '@mui/material';
+// import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+// import CardActions from '@mui/material/CardActions';
 
 function Posts({ singlePost }) {
   return (
@@ -18,9 +20,9 @@ function Posts({ singlePost }) {
           {singlePost.post_text}
         </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Full post</Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
