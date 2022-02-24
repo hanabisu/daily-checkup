@@ -38,7 +38,7 @@ function Navbar() {
   return (
     <AppBar position="static">
       <Toolbar style={{ justifyContent: 'space-between' }}>
-        <Typography style={{ fontFamily: 'Fredoka One' }} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography style={{ fontFamily: 'Playfair Display' }} variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Daily CheckUp
         </Typography>
         <div>

@@ -66,8 +66,8 @@ function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
-        <Typography variant="h3" style={{ padding: '40px 10px 40px 10px', fontFamily: 'Fredoka One' }}>Daily CheckUp</Typography>
-        <Typography variant="h5" style={{ fontFamily: 'Fredoka One' }}>{isSignUp ? 'sign up' : 'login'}</Typography>
+        <Typography variant="h3" style={{ padding: '40px 10px 40px 10px', fontFamily: 'Playfair Display' }}>Daily CheckUp</Typography>
+        <Typography variant="h5" style={{ fontFamily: 'Playfair Display' }}>{isSignUp ? 'sign up' : 'login'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {

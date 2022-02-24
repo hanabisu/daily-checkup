@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import reducers from './reducers/index';
 
 import './index.css';
@@ -16,10 +17,15 @@ const theme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#fbc02d',
+      main: '#FFE357',
+      light: '#faf2c8',
     },
     secondary: {
-      main: '#f50057',
+      main: '#d4c9e6',
+    },
+    background: {
+      default: '#fff3a9',
+      paper: '#fdffca',
     },
     info: {
       main: '#795548',
@@ -27,7 +33,7 @@ const theme = createTheme({
   },
   spacing: 8,
   typography: {
-    fontFamily: 'Zen Kaku Gothic Antique',
+    fontFamily: 'Playfair Display',
     fontWeightLight: 500,
     fontWeightRegular: 600,
   },
@@ -36,6 +42,7 @@ const theme = createTheme({
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <App />
     </ThemeProvider>
   </Provider>,
