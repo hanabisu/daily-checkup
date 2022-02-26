@@ -51,7 +51,7 @@ function CreatePost({ getData }) {
         value={postText}
       />
 
-      <Button sx={{ width: '25%' }} variant="contained" color="primary" onClick={postEvent}>
+      <Button sx={{ width: '25%' }} variant="contained" color="inherit" onClick={postEvent}>
         Save
       </Button>
       <Snackbar

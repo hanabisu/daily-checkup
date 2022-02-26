@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
+// import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import {
+  AppBar, Toolbar, Typography,
+} from '@material-ui/core';
 // import InputBase from '@mui/material/InputBase';
 // import SearchIcon from '@mui/icons-material/Search';
 import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
+import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
-
-import {
-  MenuItem,
-} from '@material-ui/core';
+// import Typography from '@mui/material/Typography';
 
 function PostsGridHeader({ setCategory }) {
   const [groupBy, setGroupBy] = useState('month');
@@ -95,7 +93,7 @@ function PostsGridHeader({ setCategory }) {
   return (
     <Box sx={{ pt: 2, flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar style={{ justifyContent: 'space-between' }}>
           <Typography
             variant="h6"
             noWrap
